@@ -34,7 +34,7 @@ jobs:
             echo APP_NAME=${App_Name} >> ./.circleci/.env
             echo APP_DEBUG=$DEBUG >> ./.circleci/.env
             echo APP_KEY=${App_Key_Dev} >> ./.circleci/.env
-            ENV_FILE=`echo $(cat ./.circleci/.test)`
+            ENV_FILE=`echo $(cat ./.circleci/.env)`
             echo "$ENV_FILE"
             echo -----------
 
