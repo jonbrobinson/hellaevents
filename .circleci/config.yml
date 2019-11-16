@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jrcodes/laravel62-php72
+      - image: jrcodes/laravel62-php72:latest
     steps:
       - checkout
       - run:
