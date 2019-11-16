@@ -29,8 +29,8 @@ jobs:
           name: Move Tmp Env To Project
           command: |
             touch ./.env
-            VARS = `echo $(cat ./.circleci/.env)`
-            echo "$VARS" >> ./.env
+            VARS=`echo $(cat ./.circleci/.env)`
+            echo $VARS >> ./.env
       - run:
           name: Download Composer
           command: |
