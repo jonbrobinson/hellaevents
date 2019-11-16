@@ -30,7 +30,7 @@ jobs:
           command: |
             touch ./.env
             VARS = `echo $(cat ./.circleci/.env)`
-            echo $VAR >> ./.env
+            echo $VARS >> ./.env
       - run:
           name: Download Composer
           command: |
