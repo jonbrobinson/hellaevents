@@ -10,6 +10,27 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Create Temp Env File
+          command: |
+            touch ./.circleci/.env
+      - run:
+          name: Add Env Variables
+          command: |
+            BRANCH=`echo $CIRCLE_BRANCH`
+            DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
+            echo APP_NAME=${App_Name} >> ./.circleci/.env
+            echo APP_NAME=${App_Name} >> ./.circleci/.env
+            echo APP_DEBUG=$DEBUG >> ./.circleci/.env
+            echo APP_KEY=${App_Key_Dev} >> ./.circleci/.env
+            echo DB_Connection=${App_Key_Dev}
+            cat ./.circleci/.env
+            echo -----------
+      - run:
+          name: Move Tmp Env To Project
+          command: |
+            touch ./.env
+            `echo $(cat ./.circleci/.env)` >> ./.env
+      - run:
           name: Download Composer
           command: |
             php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -22,19 +43,7 @@ jobs:
           command: |
             composer install -n --prefer-dist
       - run:
-          name: Create Env File
+          name: Unit Test
           command: |
-            touch ./.circleci/.env
-      - run:
-          name: Add Env Variables
-          command: |
-            BRANCH=`echo $CIRCLE_BRANCH`
-            DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
-            echo APP_NAME=${App_Name} >> ./.circleci/.env
-            echo APP_NAME=${App_Name} >> ./.circleci/.env
-            echo APP_DEBUG=$DEBUG >> ./.circleci/.env
-            echo APP_KEY=${App_Key_Dev} >> ./.circleci/.env
-            cat ./.circleci/.env
-            echo -----------
-
+            ./vendor/bin/phpunit
 
