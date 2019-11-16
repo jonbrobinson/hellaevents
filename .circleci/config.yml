@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Add Env Variables
           command: |
-            BRANCH=`echo building branch $CIRCLE_BRANCH`
+            BRANCH=`echo $CIRCLE_BRANCH`
             DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
             echo APP_NAME=${App_Name} >> ./.circleci/.env
             echo APP_NAME=${App_Name} >> ./.circleci/.env
