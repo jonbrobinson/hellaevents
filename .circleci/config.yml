@@ -18,10 +18,10 @@ jobs:
           command: |
             BRANCH=`echo $CIRCLE_BRANCH`
             DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
-            echo APP_NAME=${App_Name}$'\n' >> ./.circleci/.env
-            echo APP_DEBUG=$DEBUG$'\n' >> ./.circleci/.env
-            echo APP_KEY=${App_Key_Dev}$'\n' >> ./.circleci/.env
-            echo DB_Connection=${App_Key_Dev}$'\n' >> ./.circleci/.env
+            echo APP_NAME=${App_Name}$'\r\n' >> ./.circleci/.env
+            echo APP_DEBUG=$DEBUG$'\r\n' >> ./.circleci/.env
+            echo APP_KEY=${App_Key_Dev}$'\r\n' >> ./.circleci/.env
+            echo DB_Connection=${App_Key_Dev}$'\r\n' >> ./.circleci/.env
       - run:
           name: Move Tmp Env To Project
           command: |
