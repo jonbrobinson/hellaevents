@@ -1,0 +1,28 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: jrcodes/laravel62-php72
+    steps:
+      - checkout
+      - run:
+          name: Download Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+            php composer.phar self-update
+            mv composer.phar /usr/local/bin/composer
+      - run:
+          name: Run Composer Install
+          command: |
+            composer install -n --prefer-dist
+      - run:
+          name: Unit Test
+          command: |
+            ./vendor/bin/phpunit
+
