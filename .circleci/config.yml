@@ -23,10 +23,11 @@ jobs:
             composer install -n --prefer-dist
       - run:
           name: Create Env File
-          command: touch ./.circleci/.env
+          command: |
+            touch ./.circleci/.env
       - run:
           name: Add Env Variables
-          command:
+          command: |
             BRANCH=`echo building branch $CIRCLE_BRANCH`
             DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
             echo APP_NAME=${App_Name} >> ./.circleci/.env
