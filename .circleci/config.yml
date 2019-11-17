@@ -52,12 +52,12 @@ jobs:
   build_docker_image:
     environment:
       IMAGE_NAME: jrcodes/hellaevents
-      DOCKER_USERNAME: jrcodes
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - setup_remote_docker
+      - machine: true
       - run:
           name: Build Docker Image
           command: |
