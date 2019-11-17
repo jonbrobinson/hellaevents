@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: jrcodes/laravel62-php72:v0.1.0-rc.1
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ab:0d:a6:6e:ef:fe:c3:d2:76:fd:40:7c:64:0d:cb:04"
       - checkout
       - run:
           name: Create Temp Env File
