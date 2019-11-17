@@ -45,9 +45,10 @@ jobs:
           command: |
             ./vendor/bin/phpunit
       - run:
-        command: |
-          rm ./env
-          rm ./.circleci/.env
+          name: Remove Tmp Env files
+          command: |
+            rm ./env
+            rm ./.circleci/.env
   build_docker_image:
     environment:
       IMAGE_NAME: jrcodes/hellaevents
