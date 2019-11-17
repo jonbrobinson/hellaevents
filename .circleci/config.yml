@@ -70,8 +70,3 @@ workflows:
           - build_docker_image:
               requires:
                 - pre_build_test
-              filters:
-                tags:
-                  only: /^v.*/
-                tags:
-                  ignore: /*(-rc).*/
