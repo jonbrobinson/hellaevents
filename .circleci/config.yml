@@ -62,8 +62,8 @@ jobs:
           name: Build Docker Image
           command: |
             echo "${Docker_Password}" | docker login -u "${Docker_Username}" --password-stdin
-            docker build -t $IMAGE_NAME:latest .
-            docker push $IMAGE_NAME:latest
+            docker build -t ${IMAGE_NAME}:latest .
+            docker push ${IMAGE_NAME}:latest
 workflows:
   version: 2
   build-master:
