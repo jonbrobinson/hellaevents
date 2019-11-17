@@ -51,7 +51,7 @@ jobs:
             rm ./.circleci/.env
   build_docker_image:
     environment:
-      IMAGE_NAME: jrcodes/hellevents
+      IMAGE_NAME: jrcodes/hellaevents
       DOCKER_USERNAME: jrcodes
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -59,11 +59,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Build Docker image
+          name: Build Docker Image
           command: |
-            echo "${Docker_Password}" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker build -t $IMAGE_NAME:${CIRCLE_TAG} .
-            docker push $IMAGE_NAME:${CIRCLE_TAG}
+            echo "${Docker_Password}" | docker login -u "$${Docker_Username}" --password-stdin
+            docker build -t $IMAGE_NAME:$CIRCLE_TAG .
+            docker push $IMAGE_NAME:$CIRCLE_TAG
 workflows:
   version: 2
   build-master:
