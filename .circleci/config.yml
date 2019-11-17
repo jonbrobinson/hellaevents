@@ -51,7 +51,7 @@ jobs:
             rm ./.circleci/.env
   build_docker_image:
     environment:
-      IMAGE_NAME: jrcodes/hellaevents
+      IMAGE_NAME: jrcodes/hellevents
       DOCKER_USERNAME: jrcodes
     docker:
       - image: circleci/buildpack-deps:stretch
