@@ -66,7 +66,7 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - pre_build_test:
+      - pre_build_test
       - build_docker_image:
           requires:
             - pre_build_test
