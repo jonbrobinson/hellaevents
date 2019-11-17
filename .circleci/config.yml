@@ -16,8 +16,7 @@ jobs:
       - run:
           name: Add Env Variables
           command: |
-            BRANCH=`echo $CIRCLE_BRANCH`
-            DEBUG=$([ $BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
+            DEBUG=$([ $CIRCLE_BRANCH == "master" ] && echo ${App_Debug_On} || echo ${App_Debug_Off})
             echo APP_NAME=${App_Name}$'\r\n' >> ./.circleci/.env
             echo APP_DEBUG=$DEBUG$'\r\n' >> ./.circleci/.env
             echo APP_KEY=${App_Key_Dev}$'\r\n' >> ./.circleci/.env
@@ -60,14 +59,24 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
+            TAG=$([ -z ${CIRCLE_TAG} ] && echo latest || echo ${CIRCLE_TAG})
             echo "${Docker_Password}" | docker login -u "${Docker_Username}" --password-stdin
-            docker build -t ${IMAGE_NAME} -f ./app.dockerfile .
+            docker build -t ${IMAGE_NAME}:${TAG} -f ./app.dockerfile .
             docker push ${IMAGE_NAME}:latest
 workflows:
   version: 2
   build-master:
     jobs:
-      - pre_build_test
+      - pre_build_test:
+          filters:
+          tags:
+            only: /^v.*/
       - build_docker_image:
           requires:
             - pre_build_test
+          filters:
+          tags:
+            only: /^v.*/
+          branches:
+              ignore: /.*/
+
