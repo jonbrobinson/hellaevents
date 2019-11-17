@@ -58,11 +58,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-        name: Build Docker image
-        command: |
-          echo "${Docker_Password}" | docker login -u "${Docker_Username}" --password-stdin
-          docker build -t $IMAGE_NAME:${CIRCLE_TAG} .
-          docker push $IMAGE_NAME:${CIRCLE_TAG}
+          name: Build Docker image
+          command: |
+            echo "${Docker_Password}" | docker login -u "${Docker_Username}" --password-stdin
+            docker build -t $IMAGE_NAME:${CIRCLE_TAG} .
+            docker push $IMAGE_NAME:${CIRCLE_TAG}
 workflows:
   version: 2
   build-master:
