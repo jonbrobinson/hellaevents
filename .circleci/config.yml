@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Remove Tmp Env files
           command: |
-            rm ./env
+            rm ./.env
             rm ./.circleci/.env
   build_docker_image:
     environment:
