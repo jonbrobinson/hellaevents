@@ -64,9 +64,9 @@ jobs:
           command: |
             TAG=$([ -z ${CIRCLE_TAG} ] && echo latest || echo ${CIRCLE_TAG})
             echo "${Docker_Password}" | docker login -u "${Docker_Username}" --password-stdin
-            docker build -t ${IMAGE_NAME}:${TAG} -t ${IMAGE_NAME}:latest -f ./app.dockerfile .
+            docker build -t ${IMAGE_NAME} -t ${IMAGE_NAME}:${TAG} -f ./app.dockerfile .
             docker push ${IMAGE_NAME}:${TAG}
-            docker push ${IMAGE_NAME}:${TAG}
+            docker push ${IMAGE_NAME}:latest
 workflows:
   version: 2
   build-master:
