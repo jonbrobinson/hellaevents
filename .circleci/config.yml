@@ -46,8 +46,8 @@ jobs:
             ./vendor/bin/phpunit
       - run:
         command: |
-        rm ./env
-        rm ./.circleci/.env
+          rm ./env
+          rm ./.circleci/.env
   build_docker_image:
     environment:
       IMAGE_NAME: jrcodes/hellaevents
