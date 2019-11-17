@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  pre_build_test:
     docker:
       - image: jrcodes/laravel62-php72:v0.1.0-rc.1
     steps:
@@ -44,4 +44,34 @@ jobs:
           name: Unit Test
           command: |
             ./vendor/bin/phpunit
-
+      - run:
+        command: |
+        rm ./env
+        rm ./.circleci/.env
+  build_docker_image:
+    environment:
+      IMAGE_NAME: jrcodes/hellaevents
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+        name: Build Docker image
+        command: |
+          echo "${Docker_Password}" | docker login -u "${Docker_Username}" --password-stdin
+          docker build -t $IMAGE_NAME:${CIRCLE_TAG} .
+          docker push $IMAGE_NAME:${CIRCLE_TAG}
+workflows:
+      version: 2
+      build-master:
+        jobs:
+          - pre_build_test:
+          - build_docker_image:
+              requires:
+                - pre_build_test
+              filters:
+                tags:
+                  only: /^v.*/
+                tags:
+                  ignore: /*(-rc).*/
