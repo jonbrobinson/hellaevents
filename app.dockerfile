@@ -1,4 +1,4 @@
-FROM jrcodes/laravel62-php72:v0.1.0-rc.1
+FROM lara72_no_xdebug:1
 
 MAINTAINER Jonathan Robinson <jonrobinson.codes@gmail.com>
 
