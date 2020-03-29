@@ -9,7 +9,7 @@ $factory->define(Organization::class, function (Faker $faker) {
         'name' => $faker->company,
         'description' => $faker->text,
         'email' => $faker->companyEmail,
-        'website' => $faker->safeEmailDomain,
+        'website' => $faker->url,
         'phone' => $faker->phoneNumber,
     ];
 });

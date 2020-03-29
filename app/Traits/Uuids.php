@@ -14,4 +14,14 @@ trait Uuids
             $model->{$keyName} = Uuid::generate(4)->string;
         });
     }
+
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
 }

@@ -12,13 +12,21 @@ class CreateOrganizationsTable extends Migration
     public function up()
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
-            $table->string('email');
-            $table->string('website');
-            $table->string('phone');
+            $table->string('mission')->nullable();
+            $table->string('description')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('website')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('address_id')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('organizations', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('organizations');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 

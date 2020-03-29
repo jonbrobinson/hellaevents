@@ -1,4 +1,4 @@
-FROM lara72_no_xdebug:1
+FROM jrcodes/lara72_no_xdebug
 
 MAINTAINER Jonathan Robinson <jonrobinson.codes@gmail.com>
 
